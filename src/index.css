@@ -11,3 +11,93 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.form{
+  margin-top: 50px;
+  margin-bottom: 15px;
+  border: 12px solid red;
+  width: fit-content;
+}
+
+.form input{
+  margin-bottom: 20px;
+  margin-right: 5px;
+}
+
+
+
+input[type="submit"]:hover{
+  background-color: red;
+}
+
+input[type="text"]{
+  text-align: center;
+}
+
+button:hover{
+  background-color: red;
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+}
+
+.addbus{
+  margin-right: 100px;
+  margin-top: 100px;
+  
+}
+
+nav{
+  display: flex;
+  flex-direction: row;
+}
+
+.links{
+  margin-right: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 3px;
+  background-color: aqua;
+  width: 15vw;
+  text-decoration: none;
+}
+
+.links:hover{
+  background-color: rgb(231, 204, 204);
+  text-decoration: none;
+}
+
+.seat{
+  height: 20%;
+  width: 20%;
+  text-align: center;
+  border: 2px solid;
+  margin: 10px;
+}
+
+
+
+.busRep{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+}
+
+.aqua{
+  background-color: aquamarine;
+  width: 45vw;
+  border-radius: 5px;
+}
+
+.react-confirm-alert-{
+  position: relative;
+  top: 50%;
+}
+
+.react-confirm-alert-button-group button:first-child{
+  color: red;
+  font-weight: 600;
+}

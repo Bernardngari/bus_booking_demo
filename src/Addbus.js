@@ -1,17 +1,17 @@
 import React from 'react'
 import { useState } from 'react';
+import { useContext } from 'react';
+import { UserContext } from './App';
 
-function Addbus() {
-
+function Addbus(){
+  const user = useContext(UserContext);
   const [formData, setFormData] = useState({})
-
   function handleChange(e){
-    setFormData({...formData, [e.target.name]: e.target.value})
+    setFormData({...formData, driver_id: user.id, [e.target.name]: e.target.value})
   }
-
   function handleSubmit(e){
     e.preventDefault();
-    fetch("https://bus-booking-web-api.herokuapp.com/buses", {
+    fetch("https://bus-booking-web-api.herokuapp.com/buses",{
       credentials: "include",
       method: "POST", 
       headers: {
@@ -22,8 +22,7 @@ function Addbus() {
     .then((r) => r.json())
     .then((data) => console.log(data))
   }
-
-  console.log(formData);
+console.log(formData);
   return (
     <form onSubmit={handleSubmit} className="addbus">
       <input onChange={handleChange} type="text" name="plate_number" placeholder='plate number' /> <br />
@@ -34,7 +33,7 @@ function Addbus() {
       <input onChange={handleChange} type="date" name="travel_date" placeholder='Travel date' /> <br />
       <input onChange={handleChange} type="time" name="travel_time" placeholder='Travel time' /> <br />
       <label>Available<input onChange={handleChange} type="checkbox"  name="available" /> </label> <br />
-      <input onChange={handleChange} type="number" name="driver_id" placeholder='Driver ID' /> <br />
+      <input type="number" onChange={handleChange} name="driver_id" hidden /> <br />
       <input onChange={handleChange} type="submit" value='Add bus' /> <br />
     </form>
   )

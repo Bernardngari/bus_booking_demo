@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
-function Login() {
+function Login({onLogin}) {
   const [formdata, setFormData] = useState({
     email: "",
     password: "",
@@ -11,7 +10,6 @@ function Login() {
   const handleChange =(e) =>{
     setFormData({...formdata, [e.target.name]: e.target.value})
   }
-  
   
   const handleSubmit =(e) =>{
     e.preventDefault()
@@ -23,12 +21,25 @@ function Login() {
       },
       body: JSON.stringify(formdata)
     })
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem("id", data.id)
-      localStorage.setItem("name", data.name)
-      localStorage.setItem("role", data.role)
+    .then((r) =>{
+      if(r.ok){
+        r.json().then((user) =>{
+          let message = `${user.name} has successfully logged in.`
+          console.log(message);
+          onLogin()
+        })
+      }else{
+        console.log("Login failed");
+      }
+      
     })
+
+    //.then(res => res.json())
+    //.then(user => {
+    //  const message = `${user.name} has successfully logged in`
+    //  console.log(message);
+    //  onLogin()
+    //})
   }
   
   const handleLogout =() =>{
@@ -36,7 +47,6 @@ function Login() {
       credentials: "include",
       method: "DELETE"
     })
-    localStorage.clear()
     console.log("logged out")
   }
   return (

@@ -101,3 +101,7 @@ nav{
   color: red;
   font-weight: 600;
 }
+input[type="checkbox"]{
+width: 20px;
+height: 20px;
+}

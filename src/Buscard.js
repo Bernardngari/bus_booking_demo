@@ -1,8 +1,12 @@
 import { confirmAlert } from "react-confirm-alert"
 import 'react-confirm-alert/src/react-confirm-alert.css';
-function Buscard({busData, seats}) {
+import { UserContext } from './App';
+import { useContext } from "react";
+function Buscard({busData, seats, onBooking}) {
     const{plate_number, to, from, travel_date, travel_time} = busData
+    const user = useContext(UserContext)
     const handleClick=(e)=>{
+      const seatNo = e.target.textContent
       const id = e.target.id
       fetch(`https://bus-booking-web-api.herokuapp.com/seats/${id}`, {
         credentials: "include",
@@ -10,9 +14,10 @@ function Buscard({busData, seats}) {
         headers:{
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({is_booked: true})
+        body: JSON.stringify({is_booked: true,seat_no: seatNo,customer_id: user.id})
       })
-      window.location.reload()
+      .then((res) =>res.json())
+      .then((seat) =>onBooking(seat))
     }
 
     function handleAlreadyBooked(){
